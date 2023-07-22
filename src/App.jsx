@@ -44,21 +44,23 @@ function App() {
     let promises = []
     let endPoints = ["tv", "movie"]
     let allGenres = {}
+
+    //ambil api tv dan movie
     endPoints.forEach((url)=>{
       promises.push(fetchDataFromApi(`/genre/${url}/list`))
     })
 
+    //ambil data api dari masing masing key
     const data = await Promise.all(promises);
     console.log(data);
+
+    //looping data tersebut dan simpan di varibel allgenres
     data.map(({genres}) => {
       return genres.map((item) => (allGenres[item.id] = item ))
     })
 
-    //simpan ke dalam redux
+    //simpan ke dalam redux state
     dispatch(getGenres(allGenres))
-
-    
-
 
   }
 
