@@ -31,7 +31,6 @@ const DetailsBanner = ({video, crew, player}) => {
 
     //ambil crew and director
     const director = crew?.filter((f) => f.job === "Director")
-    const acting = player?.filter((f) => f.known_for_department === "Acting")
     const writter = crew?.filter((f) => f.job === "Screenplay" || f.job === "Story" ||f.job === "Writer" )
 
 
@@ -158,23 +157,7 @@ const DetailsBanner = ({video, crew, player}) => {
                                                 </div>
                                              )
                                             }
-                                            {
-                                             acting?.length > 0 && (
-                                                <div className="info">
-                                                    <span className="text bold">
-                                                        Player: {""}
-                                                    </span>
-                                                    <span className="text">
-                                                        {acting?.map((d, i) => (
-                                                            <span key={i}>
-                                                                {d.name}
-                                                                {acting.length - 1 !== i && ", "}
-                                                            </span>
-                                                        ))}
-                                                    </span>
-                                                </div>
-                                             )
-                                            }
+                                            
                                             {
                                              data?.created_by?.length > 0 && (
                                                 <div className="info">
