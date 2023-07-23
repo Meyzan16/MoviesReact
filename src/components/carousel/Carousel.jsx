@@ -17,6 +17,12 @@ import "./style.scss";
 
 
 const Carousel = ({data,loading, endpoint}) => {
+    
+    // data?.map((item) => {
+    //     console.log(item.title);
+    // })
+ 
+
     const carouselContainer = useRef();
     const {url} = useSelector((state) => state.home)
     const navigate = useNavigate();

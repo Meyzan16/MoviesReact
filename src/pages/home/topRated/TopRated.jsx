@@ -5,7 +5,7 @@ import SwitchTabs from '../../../components/switchTabs/SwitchTabs';
 import useFetch from '../../../hooks/useFetch';
 import Carousel from '../../../components/carousel/Carousel';
 
-
+//test
 const TopRated = () => {
     const [endpoint, setEndPoint] = useState("movie");
 
