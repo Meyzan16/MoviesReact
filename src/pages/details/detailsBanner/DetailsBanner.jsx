@@ -12,7 +12,7 @@ import CircleRating from "../../../components/circleRating/CircleRating";
 import Img from "../../../components/lazyLoadImage/Img.jsx";
 import PosterFallback from "../../../assets/no-poster.png";
 import {PlayIcon} from "../Playbtn";
-// import VideoPopup from "../../../components/videoPopup/VideoPopup";
+import VideoPopup from "../../../components/videoPopup/VideoPopup";
 
 
 
@@ -20,12 +20,16 @@ const DetailsBanner = ({video, crew, player}) => {
     const { mediaType,id} = useParams();
     const {data,loading} = useFetch(`/${mediaType}/${id}`)
 
+    //state vide
+    const [show,setShow] = useState(false);
+    const [videoId, setVideoId] = useState(null)
+
     const {url} = useSelector((state) => state.home);
 
     //looping data genres
     const _genres = data?.genres?.map((g) => g.id);
 
-    //ambil director
+    //ambil crew and director
     const director = crew?.filter((f) => f.job === "Director")
     const acting = player?.filter((f) => f.known_for_department === "Acting")
     const writter = crew?.filter((f) => f.job === "Screenplay" || f.job === "Story" ||f.job === "Writer" )
@@ -67,7 +71,10 @@ const DetailsBanner = ({video, crew, player}) => {
                                             <Genres data={_genres}/>
                                             <div className="row">
                                                 <CircleRating rating={data.vote_average.toFixed(1)} />
-                                                <div className="playbtn" onClick={() => {}}>
+                                                <div className="playbtn" onClick={() => {
+                                                    setShow(true);
+                                                    setVideoId(video?.key)
+                                                }}>
                                                     <PlayIcon />
                                                     <span className="text">
                                                         Watch Trailer
@@ -188,6 +195,13 @@ const DetailsBanner = ({video, crew, player}) => {
 
                                         </div>
                                     </div>
+
+                                <VideoPopup 
+                                    show={show}
+                                    setShow={setShow}
+                                    videoId={videoId}
+                                    setVideoId={setVideoId}
+                                />
                                 </ContentWrapper>
 
                         </React.Fragment>
